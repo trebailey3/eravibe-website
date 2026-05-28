@@ -63,11 +63,11 @@
 <div class="container">
   <div class="label">legal</div>
   <h1>Privacy Policy</h1>
-  <div class="updated">Last updated: May 16, 2026 · Effective: May 16, 2026</div>
+  <div class="updated">Last updated: May 28, 2026 · Effective: May 28, 2026</div>
 
   <div class="tldr">
     <div class="tldr-label">plain english summary</div>
-    <p>We collect only what we need to run er@. <strong>We never sell your data.</strong> We never serve ads. Photos are deleted from our servers after expiry. You can delete your account and all data at any time. Minimum age is 13.</p>
+    <p>We collect only what we need to run er@. <strong>We never sell your data.</strong> We never serve ads. Photos are deleted from our servers after expiry. The Era Shop uses your pins and interests to suggest products — we don't process payments or store financial data. You can delete your account and all data at any time. Minimum age is 13.</p>
   </div>
 
   <h2>1. Who We Are</h2>
@@ -82,12 +82,14 @@
     <li><strong>Device information:</strong> Device type, operating system version, and app version — used for performance and crash diagnostics only.</li>
     <li><strong>Usage data:</strong> Aggregated, anonymized event data (e.g., screens viewed, features used) collected via PostHog for product improvement.</li>
     <li><strong>Crash logs:</strong> Anonymized crash reports collected via Sentry to fix bugs.</li>
+    <li><strong>Shopping preferences (Era Shop):</strong> Your active pins and trending interest labels are used to generate personalized product recommendations in the Era Shop. This data is not shared with retailers or advertisers. No purchase history, payment information, or transaction data is collected or stored by er@.</li>
   </ul>
   <p>We do <strong>not</strong> collect your GPS location, audio recordings, biometric data, or your device contacts list. If you use our contact-matching feature to find friends, your contacts are hashed locally on your device and the hashes are used for matching only — the raw contact data is never transmitted to or stored on our servers.</p>
 
   <h2>3. How We Use Your Information</h2>
   <ul>
     <li>To provide, maintain, and improve the er@ service</li>
+    <li>To generate personalized product recommendations in the Era Shop based on your active pins and trending interests</li>
     <li>To send notifications you've opted into (new followers, reactions, expiry warnings)</li>
     <li>To enforce our Terms of Use and protect users from harmful content</li>
     <li>To process er@+ subscription payments (handled by Apple App Store and Google Play — we never see your payment card details)</li>
@@ -119,6 +121,7 @@
   <ul>
     <li><strong>Supabase</strong> — database and authentication hosting (United States)</li>
     <li><strong>Cloudflare</strong> — media storage and CDN (global)</li>
+    <li><strong>Shopify</strong> — product catalog and checkout for the Era Shop. When you tap "Shop Now," you are redirected to the retailer's website. er@ does not process or store any payment information. Shopify's privacy policy applies to any data you provide during checkout.</li>
     <li><strong>RevenueCat</strong> — subscription management (United States)</li>
     <li><strong>Sightengine</strong> — automated image moderation to detect prohibited content (France)</li>
     <li><strong>PostHog</strong> — anonymized product analytics (United States/EU)</li>
@@ -144,10 +147,19 @@
   <p><strong>California residents (CCPA):</strong> We do not sell personal information. You have the right to know what data we collect and to request deletion.</p>
   <p><strong>EEA/UK residents (GDPR):</strong> You have the rights listed above plus the right to restrict processing, object to processing, and data portability. Our legal basis for processing is performance of a contract (providing the service), legitimate interests (safety and fraud prevention), and consent (optional analytics).</p>
 
-  <h2>9. Security</h2>
+  <h2>9. Era Shop</h2>
+  <p>The Era Shop is a personalized product discovery feature within er@. It surfaces product recommendations based on your active pins and community trending topics.</p>
+  <ul>
+    <li><strong>How recommendations work:</strong> Your active pin labels (e.g., "Nike," "WNBA," "Sabrina Carpenter") are matched against product tags to generate a ranked list of suggested products. No purchase history or external data is used.</li>
+    <li><strong>Checkout:</strong> All purchases are completed on the retailer's external website (e.g., Shopify). er@ does not process, store, or have access to any payment information, credit card data, or transaction records.</li>
+    <li><strong>Affiliate disclosure:</strong> er@ may earn a commission when you purchase products through Era Shop links. This does not affect the price you pay.</li>
+    <li><strong>No financial data collected:</strong> er@ never collects, stores, or transmits payment card numbers, bank account information, or any other financial data.</li>
+  </ul>
+
+  <h2>10. Security</h2>
   <p>We use industry-standard security practices including encrypted data transmission (TLS), hashed passwords (bcrypt), row-level security on all database tables, and private (non-public) cloud storage for all user photos. No method of transmission or storage is 100% secure — if you discover a security vulnerability, please email <a href="mailto:privacy@eravibe.app">privacy@eravibe.app</a> immediately.</p>
 
-  <h2>10. Changes to This Policy</h2>
+  <h2>11. Changes to This Policy</h2>
   <p>We may update this Privacy Policy from time to time. We will notify you of material changes via in-app notification and by updating the "Last updated" date at the top of this page. Your continued use of er@ after the effective date of any changes constitutes your acceptance of the updated policy.</p>
 
   <div class="contact-box">
