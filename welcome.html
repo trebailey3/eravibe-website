@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to er@ — your vibe. your era.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0D0D; --purple: #6B5CE7; --purple-light: #8B7CF8;
+    --teal: #0F6E56; --coral: #993C1D; --amber: #F5A623;
+    --white: #FFFFFF; --gray: #888; --gray-light: #333;
+    --card-bg: #141414; --green: #3ab38a; --blue: #4A9EE7;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; background: rgba(13,13,13,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .nav-logo { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 20px; text-decoration: none; color: var(--white); }
+  .nav-logo span { color: var(--purple); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--gray); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  @media (max-width: 600px) { .nav-links { display: none; } }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 24px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(107,92,231,0.15) 0%, transparent 70%); pointer-events: none; }
+  .hero-eyebrow { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--purple-light); margin-bottom: 24px; font-weight: 500; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(52px, 8vw, 100px); font-weight: 900; line-height: 1.0; margin-bottom: 32px; letter-spacing: -2px; }
+  .hero h1 em { font-style: italic; color: var(--purple-light); }
+  .hero-sub { font-size: 20px; color: var(--gray); max-width: 560px; margin: 0 auto 48px; line-height: 1.6; }
+  .pin-dots { display: flex; gap: 12px; justify-content: center; margin-bottom: 48px; }
+  .pin-dot { width: 14px; height: 14px; border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+  .pin-dot:nth-child(1) { background: var(--purple); animation-delay: 0s; }
+  .pin-dot:nth-child(2) { background: var(--teal); animation-delay: 0.3s; }
+  .pin-dot:nth-child(3) { background: var(--coral); animation-delay: 0.6s; }
+  @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.7; } }
+  .cta-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; text-decoration: none; transition: all 0.2s ease; cursor: pointer; border: none; }
+  .btn-primary { background: var(--purple); color: #fff; }
+  .btn-primary:hover { background: var(--purple-light); transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--white); border: 1px solid var(--gray-light); }
+  .btn-secondary:hover { border-color: var(--purple); color: var(--purple-light); }
+  section { max-width: 900px; margin: 0 auto; padding: 100px 24px; }
+  .section-label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--purple-light); font-weight: 500; margin-bottom: 16px; }
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 60px); font-weight: 700; line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
+  .lead { font-size: 19px; color: var(--gray); line-height: 1.7; margin-bottom: 40px; max-width: 680px; }
+  p { color: var(--gray); margin-bottom: 16px; font-size: 16px; }
+  .divider { width: 100%; height: 1px; background: var(--gray-light); max-width: 900px; margin: 0 auto; }
+  .founder-block { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  @media (max-width: 700px) { .founder-block { grid-template-columns: 1fr; gap: 40px; } }
+  .founder-name { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; line-height: 1.1; margin-bottom: 8px; }
+  .founder-title { color: var(--purple-light); font-size: 14px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; margin-bottom: 24px; }
+  .credential-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .credential-list li { display: flex; align-items: flex-start; gap: 12px; color: var(--gray); font-size: 15px; line-height: 1.5; }
+  .credential-list li::before { content: '→'; color: var(--purple-light); flex-shrink: 0; margin-top: 2px; }
+  .credential-list a { color: var(--purple-light); text-decoration: none; }
+  .credential-list a:hover { text-decoration: underline; }
+  .why-quote { font-family: 'Playfair Display', serif; font-size: clamp(24px, 4vw, 40px); font-style: italic; color: var(--white); line-height: 1.3; border-left: 3px solid var(--purple); padding-left: 32px; margin: 40px 0; }
+  .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+  @media (max-width: 600px) { .diff-grid { grid-template-columns: 1fr; } }
+  .diff-card { background: var(--card-bg); border: 1px solid var(--gray-light); border-radius: 16px; padding: 28px; transition: border-color 0.2s; }
+  .diff-card:hover { border-color: var(--purple); }
+  .diff-card .icon { font-size: 28px; margin-bottom: 12px; }
+  .diff-card h3 { font-size: 17px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
+  .diff-card p { font-size: 14px; margin: 0; line-height: 1.6; }
+  .privacy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 40px; }
+  .privacy-card { background: var(--card-bg); border: 1px solid var(--gray-light); border-radius: 16px; padding: 28px; }
+  .privacy-card .badge { display: inline-block; background: rgba(107,92,231,0.15); color: var(--purple-light); font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; margin-bottom: 16px; }
+  .privacy-card h3 { font-size: 17px; font-weight: 500; color: var(--white); margin-bottom: 10px; }
+  .privacy-card p { font-size: 14px; margin: 0; line-height: 1.6; }
+  .never-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+  .never-list li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--gray); }
+  .never-list li .x { width: 22px; height: 22px; border-radius: 50%; background: rgba(153,60,29,0.2); color: #cc6644; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+  .never-list li .check { width: 22px; height: 22px; border-radius: 50%; background: rgba(15,110,86,0.2); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+  .mono-table { width: 100%; border-collapse: collapse; margin-top: 32px; }
+  .mono-table th { text-align: left; padding: 12px 16px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--purple-light); font-weight: 500; border-bottom: 1px solid var(--gray-light); }
+  .mono-table td { padding: 20px 16px; font-size: 15px; color: var(--gray); border-bottom: 1px solid #1f1f1f; vertical-align: top; }
+  .mono-table td:first-child { color: var(--white); font-weight: 500; }
+  .mono-table tr:last-child td { border-bottom: none; }
+  .future-badge { display: inline-block; background: rgba(107,92,231,0.1); color: var(--purple-light); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 100px; margin-left: 8px; vertical-align: middle; }
+  .roadmap { display: flex; flex-direction: column; gap: 0; margin-top: 40px; position: relative; }
+  .roadmap::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: var(--gray-light); }
+  .roadmap-item { display: flex; gap: 28px; padding: 24px 0; position: relative; }
+  .roadmap-dot { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; position: relative; z-index: 1; }
+  .roadmap-dot.done { background: rgba(15,110,86,0.3); border: 1px solid var(--teal); color: var(--green); }
+  .roadmap-dot.green { background: rgba(58,179,138,0.2); border: 1px solid var(--green); color: var(--green); }
+  .roadmap-dot.blue { background: rgba(74,158,231,0.2); border: 1px solid var(--blue); color: var(--blue); }
+  .roadmap-dot.next { background: #1a1a1a; border: 1px solid var(--gray-light); color: var(--gray); }
+  .roadmap-content h3 { font-size: 17px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+  .roadmap-content p { font-size: 14px; margin: 0; }
+  .status-tag { display: inline-block; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 2px 8px; border-radius: 100px; margin-left: 10px; font-weight: 500; vertical-align: middle; }
+  .status-green { background: rgba(58,179,138,0.15); color: var(--green); }
+  .status-blue { background: rgba(74,158,231,0.15); color: var(--blue); }
+  .parents-box { background: rgba(107,92,231,0.08); border: 1px solid rgba(107,92,231,0.3); border-radius: 20px; padding: 40px; margin-top: 40px; }
+  .parents-box h3 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 32px; }
+  .contact-card { background: var(--card-bg); border: 1px solid var(--gray-light); border-radius: 12px; padding: 20px; text-decoration: none; transition: border-color 0.2s, transform 0.2s; display: block; }
+  .contact-card:hover { border-color: var(--purple); transform: translateY(-2px); }
+  .contact-card .label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--purple-light); font-weight: 500; margin-bottom: 6px; }
+  .contact-card .value { font-size: 14px; color: var(--white); }
+  .final-cta { text-align: center; padding: 120px 24px; position: relative; overflow: hidden; }
+  .final-cta h2 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 6vw, 72px); margin-bottom: 24px; }
+  footer { border-top: 1px solid var(--gray-light); padding: 40px 24px; text-align: center; color: var(--gray); font-size: 13px; }
+  footer a { color: var(--purple-light); text-decoration: none; }
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .info-box { margin-top: 32px; padding: 24px; background: var(--card-bg); border: 1px solid var(--gray-light); border-radius: 16px; }
+  .info-box p { margin: 0; font-size: 15px; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo">er<span>@</span></a>
+  <ul class="nav-links">
+    <li><a href="#founder">About Tony</a></li>
+    <li><a href="#why">Why er@</a></li>
+    <li><a href="#privacy">Privacy</a></li>
+    <li><a href="#monetization">Transparency</a></li>
+    <li><a href="https://eravibe.app" target="_blank">Get the App</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">Welcome to the family</p>
+  <div class="pin-dots">
+    <div class="pin-dot"></div>
+    <div class="pin-dot"></div>
+    <div class="pin-dot"></div>
+  </div>
+  <h1>You found<br><em>your people.</em></h1>
+  <p class="hero-sub">er@ is the app built around what you love right now. No ads, no algorithm, no follower counts. Just your vibe, your era, and the people who actually matter to you.</p>
+  <div class="cta-group">
+    <a href="https://eravibe.app" class="btn btn-primary">Get Early Access</a>
+    <a href="#why" class="btn btn-secondary">Our Story</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="founder" class="fade-in">
+  <p class="section-label">The person behind er@</p>
+  <div class="founder-block">
+    <div>
+      <div class="founder-name">William<br>"Tony" Bailey</div>
+      <div class="founder-title">Founder &amp; CEO, Arty Fishall LLC</div>
+      <p>I'm a Jacksonville, FL-based builder with 30 years in enterprise technology, most recently as Director of Digital Channel Management at Merrill Lynch / Bank of America, where I led large-scale platform modernization across Global Wealth &amp; Investment Management.</p>
+      <p>I didn't come from a startup background, but this is where I belong. I'm always writing down ideas for new apps and things I can create next. Thanks to vibe coding, now I can turn my ideas into reality. I came from building things that had to work at scale without risk for a major company. It had to work, as there were real consequences if it didn't. That's exactly the mindset I brought to er@.</p>
+    </div>
+    <div>
+      <ul class="credential-list">
+        <li>30 years driving digital transformation at Fortune 100 financial institutions</li>
+        <li>Director, Digital Channel Management — Merrill Lynch / Bank of America</li>
+        <li>VP, Senior Project Manager — Bank of America (2017–2020)</li>
+        <li>Founder &amp; CEO, GuardianAI — AI-powered scam defense app &nbsp;<a href="https://apps.apple.com/us/app/guardianai-scam-defense/id6753998288" target="_blank" rel="noopener">App Store</a> · <a href="https://play.google.com/store/apps/details?id=com.guardianai" target="_blank" rel="noopener">Google Play</a></li>
+        <li>Founder &amp; CEO, Battle AI — AI-powered mobile gaming app &nbsp;<a href="https://apps.apple.com/us/app/battle-ai/id6762310187" target="_blank" rel="noopener">App Store</a> · <a href="https://play.google.com/store/apps/details?id=com.trebailey3.battleai" target="_blank" rel="noopener">Google Play</a></li>
+        <li>Full-stack mobile builder: React Native, Expo, TypeScript, Supabase</li>
+        <li>Series 7 · Six Sigma Green Belt · Agile Methodology Trained</li>
+        <li>Hands-on with LLM integration, prompt engineering, and responsible AI design</li>
+        <li><a href="https://www.amazon.com/s?k=broker+dealer+tony+bailey" target="_blank" rel="noopener">Author of Broker/Dealer — Amazon</a></li>
+        <li><a href="https://www.amazon.com/s?k=powerful+ai+prompts+tony+bailey" target="_blank" rel="noopener">Author of Powerful AI Prompts — Amazon</a></li>
+        <li><a href="https://www.amazon.com/s?k=vibe+coding+from+a+vibe+coder+tony+bailey" target="_blank" rel="noopener">Author of Vibe Coding from a Vibe Coder — Amazon</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="why" class="fade-in">
+  <p class="section-label">Why I built this</p>
+  <h2>I wanted a social app<br>I could be proud of.</h2>
+
+  <blockquote class="why-quote">
+    "What are you into right now? That one question tells me more about you than any grid of curated photos ever could."
+  </blockquote>
+
+  <p class="lead">I've watched social media hollow out real connection. Follower counts. Algorithms designed to keep you scrolling. Ads disguised as content. Metrics that make people feel like they're not enough. I didn't want to build any of that.</p>
+
+  <p>er@ started with a simple belief: your taste is your identity. The shows you're watching, the music you can't stop playing, the places pulling at you — that's the real you. Not your highlight reel. Not your follower count. Not how many likes your last post got.</p>
+
+  <p>So I built an app around that insight. Three active pins — the things you're into right now. Photos that expire in 72 hours so you never feel trapped by your past. And when you're done with a chapter, it archives into a named era — a genuine record of who you were during that time. Your profile becomes your biography, not a performance.</p>
+
+  <p>For friends and family, it means something real: I actually know what you're into. That shared obsession is the start of real connection.</p>
+
+  <div class="diff-grid">
+    <div class="diff-card">
+      <div class="icon">🚫</div>
+      <h3>No ads. Ever.</h3>
+      <p>We will never sell ad space. Advertisers do not have access to your attention here.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">🧮</div>
+      <h3>No algorithm.</h3>
+      <p>Your feed is chronological — from people you approved, in the order they posted. Nothing curated to keep you scrolling.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">👁️</div>
+      <h3>Turn follower counts on or off.</h3>
+      <p>You choose whether your follower count is visible. Nobody else gets to decide what metrics you show on your profile.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">⏳</div>
+      <h3>Photos expire in 72 hours.</h3>
+      <p>Every photo disappears from public view after 72 hours. er@+ subscribers get 7 days. Low stakes means more authentic posts.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">🔐</div>
+      <h3>Approve followers — required for ages 13–17.</h3>
+      <p>Users 13–17 must approve every follow request. If you're 18 or older, you can choose to auto-approve follows if you prefer a more open profile.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">💬</div>
+      <h3>Comments are opt-in.</h3>
+      <p>You choose who can comment, on which posts. Mental health by design, not afterthought.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="privacy" class="fade-in">
+  <p class="section-label">Privacy &amp; Safety</p>
+  <h2>Protection is never<br>paywalled here.</h2>
+  <p class="lead">Every privacy and safety feature in er@ is free. We don't sell protection as a premium. er@+ is purely about self-expression upgrades — more pins, longer photo expiry, custom era themes. Your safety is not a product.</p>
+
+  <div class="privacy-grid">
+    <div class="privacy-card">
+      <div class="badge">Follow Control</div>
+      <h3>You approve every follow</h3>
+      <p>All follows require your explicit approval — on by default, always. You can see a requester's current pins before you decide. Either party can remove a follow relationship at any time. Auto-approve is available as an option for users 18 and older.</p>
+    </div>
+    <div class="privacy-card">
+      <div class="badge">Comments</div>
+      <h3>Three-tier comment control</h3>
+      <p>Delete any comment instantly. Restrict someone from commenting while keeping them as a follower. Or remove them entirely. Global off is always available. Per-post settings at the moment of posting.</p>
+    </div>
+    <div class="privacy-card">
+      <div class="badge">Your Data</div>
+      <h3>We collect only what we need</h3>
+      <p>Your handle, email, pins, eras, photos, and captions. Device type and OS for performance. Crash logs and aggregated usage events. That's the complete list.</p>
+    </div>
+    <div class="privacy-card">
+      <div class="badge">Legal</div>
+      <h3>COPPA &amp; GDPR compliant</h3>
+      <p>Minimum age 13. Ages 13–17 require parent or guardian review. Consent timestamps stored on every user record. Right to access, correct, delete, and export your data — always.</p>
+    </div>
+    <div class="privacy-card">
+      <div class="badge">Contacts</div>
+      <h3>We never store your contacts</h3>
+      <p>When you search for friends, your contact list is hashed for matching only, then immediately discarded. We never store, read, or message your contacts.</p>
+    </div>
+    <div class="privacy-card">
+      <div class="badge">Photos</div>
+      <h3>Real expiry, not just hidden</h3>
+      <p>Active photos are deleted from our servers within 30 days of their expiry — not just hidden from view. Era archive thumbnails are retained while your account is active.</p>
+    </div>
+  </div>
+
+  <ul class="never-list" style="margin-top:40px;">
+    <li><span class="x">X</span> We never sell your personal data (name, email, pins, photos, or anything tied to you individually)</li>
+    <li><span class="x">X</span> We never serve third-party advertisements</li>
+    <li><span class="x">X</span> We never collect GPS location, audio, or biometrics</li>
+    <li><span class="x">X</span> We never store your contacts list</li>
+    <li><span class="x">X</span> We never use facial recognition</li>
+    <li><span class="check">✓</span> CCPA compliant — we don't sell data, opt-out exercised by default</li>
+    <li><span class="check">✓</span> GDPR compliant — right to access, rectify, erase, restrict, and portability</li>
+    <li><span class="check">✓</span> All privacy features are free — protection is never paywalled</li>
+  </ul>
+
+  <div class="parents-box">
+    <h3>A note to parents.</h3>
+    <p>er@ is designed for ages 13 and up. If your child is between 13 and 17, we require that a parent or guardian review and agree to our terms during signup. Follow approval is mandatory and cannot be turned off for users in this age group.</p>
+    <p>There are no ads. Photos expire. Comments can be turned off. These aren't settings you have to hunt for — they're the defaults. If you have questions, email us at <a href="mailto:hello@eravibe.app" style="color:var(--purple-light);">hello@eravibe.app</a>. We're real people and we actually respond.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="monetization" class="fade-in">
+  <p class="section-label">Full transparency</p>
+  <h2>How we make money.<br>No fine print.</h2>
+  <p class="lead">We believe you deserve to know exactly how a social app sustains itself. Here's every revenue stream we have or plan to build — nothing hidden.</p>
+
+  <table class="mono-table">
+    <thead>
+      <tr><th>Stream</th><th>What it is</th><th>What it means for you</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>er@+ Subscription</td>
+        <td>$3.99/mo or $29.99/yr. Unlocks a 4th pin, 7-day photo expiry, custom era themes, and er@+ badge. 7-day free trial on your first subscription.</td>
+        <td>The main way we earn. You pay us directly. No advertiser involved.</td>
+      </tr>
+      <tr>
+        <td>er@ Shop</td>
+        <td>Branded merch — tees, hats, hoodies, phone cases, stickers — plus curated lifestyle products we love and stand behind.</td>
+        <td>You buy something you actually want. We earn a margin. Simple.</td>
+      </tr>
+      <tr>
+        <td>Affiliate Commerce</td>
+        <td>When we recommend a product and you buy it, we earn a small commission (typically 5–15%). Powered by a recommendation engine, not an algorithm — we surface things relevant to your current pins.</td>
+        <td>We only surface things that match what you're into right now. We always disclose when a link is affiliate. You are never targeted based on a behavioral profile.</td>
+      </tr>
+      <tr>
+        <td>Moment Partnerships <span class="future-badge">future</span></td>
+        <td>Brands sponsor cultural pin events — a limited-time pin category tied to a real cultural moment. Think a film studio sponsoring a "movie era" pin during a major release.</td>
+        <td>These will be disclosed, limited, and tied to cultural moments you'd likely be into anyway. Never interrupting your feed.</td>
+      </tr>
+      <tr>
+        <td>Taste Graph Licensing <span class="future-badge">future</span></td>
+        <td>Anonymized, aggregated trend data — what pins are surging, what's going viral in real taste — sold to music labels, studios, and brands.</td>
+        <td>This data is never tied to you personally. It's population-level trend intelligence — like a music chart, not a personal profile. We will never sell individual user data.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <p style="color:var(--white); font-weight:500; margin-bottom:8px;">Our commitment, in plain English:</p>
+    <p style="margin:0;">We will never run third-party ads. We will never sell your personal data — that means your name, email, photos, pins, or anything tied to you as an individual. We will never build an algorithm designed to maximize your time on screen at the expense of your mental health. Every dollar we earn comes from you choosing to support us, or from brands paying for cultural relevance — not from selling your attention.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="roadmap" class="fade-in">
+  <p class="section-label">What's coming</p>
+  <h2>The road ahead.</h2>
+  <p class="lead">We're building this in the open. Here's exactly where we are and what's next.</p>
+
+  <div class="roadmap">
+    <div class="roadmap-item">
+      <div class="roadmap-dot done">✓</div>
+      <div class="roadmap-content">
+        <h3>Core Architecture Complete</h3>
+        <p>Navigation, Supabase backend, authentication, pins system, onboarding, and era archive — all built and running.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot green">✓</div>
+      <div class="roadmap-content">
+        <h3>Camera Pipeline &amp; Push Notifications <span class="status-tag status-green">Complete</span></h3>
+        <p>Photo upload to Cloudflare R2, expiry enforcement, and real-time push notifications.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot green">✓</div>
+      <div class="roadmap-content">
+        <h3>er@+ Subscriptions <span class="status-tag status-green">Complete</span></h3>
+        <p>RevenueCat integration, paywall screens, and entitlement enforcement. 7-day free trial on launch.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot green">✓</div>
+      <div class="roadmap-content">
+        <h3>Invite System <span class="status-tag status-green">Complete</span></h3>
+        <p>Branded er.at/[handle] short URLs, Branch.io deep links, and referral tracking.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot blue">◉</div>
+      <div class="roadmap-content">
+        <h3>TestFlight Beta <span class="status-tag status-blue">In Progress</span></h3>
+        <p>iOS TestFlight open to early users. Android internal testing simultaneously.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot next">○</div>
+      <div class="roadmap-content">
+        <h3>Public Launch — Q4 2026</h3>
+        <p>App Store and Google Play. Handle reservation campaign. Press outreach. Campus ambassador program.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact" class="fade-in">
+  <p class="section-label">Get in touch</p>
+  <h2>We're real people.<br>We actually respond.</h2>
+  <p class="lead">Whether you're press, a potential brand partner, a parent with questions, or just someone who wants to say hi — reach out.</p>
+  <div class="contact-grid">
+    <a href="mailto:hello@eravibe.app" class="contact-card"><div class="label">General</div><div class="value">hello@eravibe.app</div></a>
+    <a href="mailto:privacy@eravibe.app" class="contact-card"><div class="label">Privacy</div><div class="value">privacy@eravibe.app</div></a>
+    <a href="mailto:press@eravibe.app" class="contact-card"><div class="label">Press</div><div class="value">press@eravibe.app</div></a>
+    <a href="mailto:partners@eravibe.app" class="contact-card"><div class="label">Brand Partnerships</div><div class="value">partners@eravibe.app</div></a>
+  </div>
+</section>
+
+<div class="final-cta fade-in">
+  <div class="pin-dots" style="justify-content:center; margin-bottom:32px;">
+    <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+  </div>
+  <h2>What are you into<br><em>right now?</em></h2>
+  <p style="color:var(--gray); font-size:18px; margin:16px auto 40px; max-width:480px;">Reserve your er@handle before someone else does. Early access is open now.</p>
+  <a href="https://eravibe.app" class="btn btn-primary" style="font-size:17px; padding:18px 40px;">Get Early Access</a>
+</div>
+
+<footer>
+  <p>2026 Arty Fishall LLC · er@ · Jacksonville, FL</p>
+  <p style="margin-top:8px;"><a href="/">Home</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a> · <a href="mailto:hello@eravibe.app">hello@eravibe.app</a></p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
